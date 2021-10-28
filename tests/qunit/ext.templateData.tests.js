@@ -323,6 +323,7 @@
 					'description',
 					'example',
 					'type',
+					'suggestedvalues',
 					'default',
 					'autovalue',
 					'deprecated',

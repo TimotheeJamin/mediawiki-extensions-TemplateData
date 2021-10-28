@@ -120,6 +120,7 @@ class TemplateDataBlob {
 			'default',
 			'inherits',
 			'type',
+			'suggestedvalues',
 		];
 
 		static $types = [
@@ -369,6 +370,19 @@ class TemplateDataBlob {
 				}
 			} else {
 				$paramObj->type = 'unknown';
+			}
+
+			// Param.suggestedvalues
+			if ( isset( $paramObj->suggestedvalues ) ) {
+				if ( !is_array( $paramObj->suggestedvalues ) ) {
+					return Status::newFatal(
+						'templatedata-invalid-type',
+						"params.{$paramName}.suggestedvalues",
+						'array'
+					);
+				}
+			} else {
+				$paramObj->suggestedvalues = [];
 			}
 
 			$paramNames[] = $paramName;
@@ -798,6 +812,20 @@ class TemplateDataBlob {
 				}
 			}
 
+			$suggestedValuesLine = '';
+			if ( count( $paramObj->suggestedvalues ) ) {
+				$suggestedValues = '';
+				foreach ( $paramObj->suggestedvalues as $suggestedValue ) {
+					$suggestedValues .= wfMessage( 'word-separator' )->inLanguage( $lang )->escaped()
+						. Html::element( 'code', [
+							'class' => 'mw-templatedata-doc-param-alias'
+						], $suggestedValue );
+				}
+				$suggestedValuesLine .= Html::element( 'dt', [],
+						wfMessage( 'templatedata-doc-param-suggestedvalues' )->inLanguage( $lang )->text()
+					) . Html::rawElement( 'dd', [], $suggestedValues );
+			}
+
 			$statusClass = '';
 			if ( $paramObj->deprecated ) {
 				$status = 'templatedata-doc-param-status-deprecated';
@@ -828,6 +856,8 @@ class TemplateDataBlob {
 						wfMessage( 'templatedata-doc-param-desc-empty' )->inLanguage( $lang )->text()
 				)
 				. Html::rawElement( 'dl', [],
+					// Suggested Values
+					$suggestedValuesLine .
 					// Default
 					( $paramObj->default !== null ? ( Html::element( 'dt', [],
 						wfMessage( 'templatedata-doc-param-default' )->inLanguage( $lang )->text()
