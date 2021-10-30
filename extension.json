@@ -144,6 +144,8 @@
 				"templatedata-modal-table-param-autovalue",
 				"templatedata-modal-table-param-suggestedvalues",
 				"templatedata-modal-table-param-suggestedvalues-placeholder",
+				"templatedata-modal-table-param-suggestedvaluelabels",
+				"templatedata-modal-table-param-suggestedvaluelabels-placeholder",
 				"templatedata-modal-table-param-default",
 				"templatedata-modal-table-param-deprecated",
 				"templatedata-modal-table-param-deprecatedValue",

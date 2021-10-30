@@ -121,6 +121,7 @@ class TemplateDataBlob {
 			'inherits',
 			'type',
 			'suggestedvalues',
+			'suggestedvaluelabels',
 		];
 
 		static $types = [
@@ -383,6 +384,19 @@ class TemplateDataBlob {
 				}
 			} else {
 				$paramObj->suggestedvalues = [];
+			}	
+			
+			// Param.suggestedvaluelabels
+			if ( isset( $paramObj->suggestedvaluelabels ) ) {
+				if ( !is_array( $paramObj->suggestedvaluelabels ) ) {
+					return Status::newFatal(
+						'templatedata-invalid-type',
+						"params.{$paramName}.suggestedvaluelabels",
+						'array'
+					);
+				}
+			} else {
+				$paramObj->suggestedvaluelabels = [];
 			}
 
 			$paramNames[] = $paramName;
@@ -670,6 +684,11 @@ class TemplateDataBlob {
 			if ( $paramObj->example !== null ) {
 				$paramObj->example = self::getInterfaceTextInLanguage( $paramObj->example, $langCode );
 			}
+			
+			// // Param.suggestedvaluelabels
+			// if ( $paramObj->suggestedvaluelabels !== null ) {
+			// 	$paramObj->suggestedvaluelabels = self::getInterfaceTextInLanguage( $paramObj->suggestedvaluelabels, $langCode );
+			// }
 		}
 
 		foreach ( $data->sets as $setObj ) {
@@ -826,6 +845,20 @@ class TemplateDataBlob {
 					) . Html::rawElement( 'dd', [], $suggestedValues );
 			}
 
+			$suggestedValueLabelsLine = '';
+			if ( count( $paramObj->suggestedvaluelabels ) ) {
+				$suggestedValueLabels = '';
+				foreach ( $paramObj->suggestedvaluelabels as $suggestedValueLabel ) {
+					$suggestedValueLabels .= wfMessage( 'word-separator' )->inLanguage( $lang )->escaped()
+						. Html::element( 'span', [
+							'class' => 'mw-templatedata-doc-param-labels-suggestedvalues'
+						], $suggestedValueLabel );
+				}
+				$suggestedValueLabelsLine .= Html::element( 'dt', [],
+						wfMessage( 'templatedata-doc-param-suggestedvaluelabels' )->inLanguage( $lang )->text()
+					) . Html::rawElement( 'dd', [], $suggestedValueLabels );
+			}
+
 			$statusClass = '';
 			if ( $paramObj->deprecated ) {
 				$status = 'templatedata-doc-param-status-deprecated';
@@ -858,6 +891,8 @@ class TemplateDataBlob {
 				. Html::rawElement( 'dl', [],
 					// Suggested Values
 					$suggestedValuesLine .
+					// Suggested Value Labels
+					$suggestedValueLabelsLine .
 					// Default
 					( $paramObj->default !== null ? ( Html::element( 'dt', [],
 						wfMessage( 'templatedata-doc-param-default' )->inLanguage( $lang )->text()

@@ -612,6 +612,10 @@ mw.TemplateData.Dialog.prototype.onParamPropertyInputChange = function ( propert
 	if ( property === 'suggestedvalues' ) {
 		value = this.propInputs[ property ].getValue();
 	}
+	
+	if ( property === 'suggestedvaluelabels' ) {
+		value = this.propInputs[ property ].getValue();
+	}
 
 	if ( allProps[ property ].restrict ) {
 		if ( value.match( allProps[ property ].restrict ) ) {
@@ -667,6 +671,10 @@ mw.TemplateData.Dialog.prototype.toggleSuggestedValues = function ( type ) {
 	// Don't show the suggested values field when the feature flag is
 	// disabled, or for inapplicable types.
 	this.propFieldLayout.suggestedvalues.toggle(
+		mw.config.get( 'wgTemplateDataSuggestedValuesEditor' ) &&
+		suggestedValuesAllowedTypes.indexOf( type ) !== -1
+	);
+	this.propFieldLayout.suggestedvaluelabels.toggle(
 		mw.config.get( 'wgTemplateDataSuggestedValuesEditor' ) &&
 		suggestedValuesAllowedTypes.indexOf( type ) !== -1
 	);
@@ -786,6 +794,8 @@ mw.TemplateData.Dialog.prototype.changeParamPropertyInput = function ( paramKey,
 			propInput.setSelected( false );
 		} else if ( propName === 'suggestedvalues' ) {
 			propInput.setValue( [] );
+		} else if ( propName === 'suggestedvaluelabels' ) {
+			propInput.setValue( [] );
 		} else {
 			propInput.setValue( '' );
 		}
@@ -864,6 +874,11 @@ mw.TemplateData.Dialog.prototype.createParamDetails = function () {
 				config.placeholder = mw.msg( 'templatedata-modal-table-param-suggestedvalues-placeholder' );
 				propInput = new OO.ui.TagMultiselectWidget( config );
 				break;
+			case 'suggestedvaluelabels':
+				config.allowArbitrary = true;
+				config.placeholder = mw.msg( 'templatedata-modal-table-param-suggestedvaluelabels-placeholder' );
+				propInput = new OO.ui.TagMultiselectWidget( config );
+				break;
 			default:
 				if ( config.multiline === true ) {
 					delete config.multiline;
@@ -893,6 +908,7 @@ mw.TemplateData.Dialog.prototype.createParamDetails = function () {
 		// * tdg-templateDataDialog-paramInput tdg-templateDataDialog-paramList-required
 		// * tdg-templateDataDialog-paramInput tdg-templateDataDialog-paramList-suggested
 		// * tdg-templateDataDialog-paramInput tdg-templateDataDialog-paramList-suggestedvalues
+		// * tdg-templateDataDialog-paramInput tdg-templateDataDialog-paramList-suggestedvaluelabels
 		// * tdg-templateDataDialog-paramInput tdg-templateDataDialog-paramList-type
 		// * tdg-templateDataDialog-paramInput tdg-templateDataDialog-paramList-uneditablefield
 		propInput.$element
@@ -916,6 +932,7 @@ mw.TemplateData.Dialog.prototype.createParamDetails = function () {
 			// * templatedata-modal-table-param-required
 			// * templatedata-modal-table-param-suggested
 			// * templatedata-modal-table-param-suggestedvalues
+			// * templatedata-modal-table-param-suggestedvaluelabels
 			// * templatedata-modal-table-param-type
 			// * templatedata-modal-table-param-uneditablefield
 			label: mw.msg( 'templatedata-modal-table-param-' + props )
@@ -965,6 +982,7 @@ mw.TemplateData.Dialog.prototype.updateParamDetailsLanguage = function ( lang ) 
 		// * templatedata-modal-table-param-required
 		// * templatedata-modal-table-param-suggested
 		// * templatedata-modal-table-param-suggestedvalues
+		// * templatedata-modal-table-param-suggestedvaluelabels
 		// * templatedata-modal-table-param-type
 		// * templatedata-modal-table-param-uneditablefield
 		label = mw.msg( 'templatedata-modal-table-param-' + prop, lang );

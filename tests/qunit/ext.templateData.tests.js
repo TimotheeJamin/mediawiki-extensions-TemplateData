@@ -324,6 +324,7 @@
 					'example',
 					'type',
 					'suggestedvalues',
+					'suggestedvaluelabels',
 					'default',
 					'autovalue',
 					'deprecated',

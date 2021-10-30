@@ -159,6 +159,9 @@ mw.TemplateData.Model.static.getAllProperties = function ( getFullData ) {
 		suggestedvalues: {
 			type: 'array'
 		},
+		suggestedvaluelabels: {
+			type: 'array'
+		},
 		default: {
 			type: 'string',
 			multiline: true,
@@ -1036,6 +1039,7 @@ mw.TemplateData.Model.prototype.outputTemplateData = function () {
 					}
 					break;
 				case 'suggestedvalues':
+				case 'suggestedvaluelabels':
 				case 'aliases':
 					// Only update these if the new templatedata has an
 					// array that isn't empty
