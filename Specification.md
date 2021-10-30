@@ -210,7 +210,13 @@ Consumers SHOULD provide this list to the user when filling out the field, but M
 
 Consumers MUST allow the user to enter free-form values not on this list.
 
-#### 3.2.12 `example`
+#### 3.2.12 `suggestedvaluelabels`
+* Value: `Array`
+* Default: `[]`
+
+A list of labels for suggested values.
+
+#### 3.2.13 `example`
 * Value: `null` or `InterfaceText`
 
 An example text for the parameter, to help users fill in the proper value.

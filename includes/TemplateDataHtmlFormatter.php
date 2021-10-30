@@ -141,6 +141,11 @@ class TemplateDataHtmlFormatter {
 			$suggestedValues[] = Html::element( 'code', [], $suggestedValue );
 		}
 
+		$suggestedValueLabels = [];
+		foreach ( $param->suggestedValueLabels as $suggestedValueLabel ) {
+			$suggestedValueLabels[] = Html::element( 'code', [], $suggestedValueLabel );
+		}
+
 		if ( $param->deprecated ) {
 			$status = 'deprecated';
 		} elseif ( $param->required ) {
@@ -174,6 +179,13 @@ class TemplateDataHtmlFormatter {
 					)
 					. Html::rawElement( 'dd', [],
 						implode( $this->localizer->msg( 'word-separator' )->escaped(), $suggestedValues )
+					) ) : '' ) .
+					// Suggested Value Labels
+					( $suggestedValueLabels ? ( Html::element( 'dt', [],
+						$this->localizer->msg( 'templatedata-doc-param-suggestedvaluelabels' )->text()
+					)
+					. Html::rawElement( 'dd', [],
+						implode( $this->localizer->msg( 'word-separator' )->escaped(), $suggestedValueLabels )
 					) ) : '' ) .
 					// Default
 					( $param->default !== null ? ( Html::element( 'dt', [],

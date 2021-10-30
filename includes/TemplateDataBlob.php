@@ -186,6 +186,11 @@ class TemplateDataBlob {
 			if ( $param->example !== null ) {
 				$param->example = $this->getInterfaceTextInLanguage( $param->example, $langCode );
 			}
+
+			// // Param.suggestedvaluelabels
+			// if ( $param->suggestedvaluelabels !== null ) {
+			// 	$param->suggestedvaluelabels = $this->getInterfaceTextInLanguage( $param->suggestedvaluelabels, $langCode );
+			// }
 		}
 
 		foreach ( $data->sets as $setObj ) {

@@ -35,6 +35,7 @@ class TemplateDataValidator {
 		'inherits',
 		'type',
 		'suggestedvalues',
+		'suggestedvaluelabels',
 	];
 
 	private const VALID_TYPES = [
@@ -268,6 +269,22 @@ class TemplateDataValidator {
 				}
 			} else {
 				$param->suggestedvalues = [];
+			}
+
+			// Param.suggestedvaluelabels
+			if ( isset( $param->suggestedvaluelabels ) ) {
+				if ( !is_array( $param->suggestedvaluelabels ) ) {
+					return Status::newFatal( 'templatedata-invalid-type',
+						"params.{$paramName}.suggestedvaluelabels", 'array' );
+				}
+				foreach ( $param->suggestedvaluelabels as $i => $value ) {
+					if ( !is_string( $value ) ) {
+						return Status::newFatal( 'templatedata-invalid-type',
+							"params.{$paramName}.suggestedvaluelabels[$i]", 'string' );
+					}
+				}
+			} else {
+				$param->suggestedvaluelabels = [];
 			}
 		}
 

@@ -326,6 +326,7 @@ QUnit.test( 'Validation tools', function ( assert ) {
 					'example',
 					'type',
 					'suggestedvalues',
+					'suggestedvaluelabels',
 					'default',
 					'autovalue',
 					'deprecated',
