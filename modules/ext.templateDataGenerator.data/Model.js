@@ -162,6 +162,9 @@ mw.TemplateData.Model.static.getAllProperties = function ( getFullData ) {
 		suggestedvaluelabels: {
 			type: 'array'
 		},
+		suggestedvaluesonly: {
+			type: 'boolean'
+		},
 		default: {
 			type: 'string',
 			multiline: true,
@@ -1019,6 +1022,7 @@ mw.TemplateData.Model.prototype.outputTemplateData = function () {
 				case 'deprecated':
 				case 'required':
 				case 'suggested':
+				case 'suggestedvaluesonly':
 					if ( !this.params[ key ][ prop ] ) {
 						// Only add a literal false value if there was a false
 						// value before

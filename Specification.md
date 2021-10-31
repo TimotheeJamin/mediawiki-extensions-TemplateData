@@ -215,7 +215,17 @@ Consumers MUST allow the user to enter free-form values not on this list.
 
 A list of labels for suggested values.
 
-#### 3.2.13 `example`
+#### 3.2.13 `suggestedvaluesonly`
+* Value: `boolean`
+* Default: `false`
+
+Whether the value chosen for this parameter has to be one of the suggested values in order to function properly. 
+
+Authors SHOULD only set this flag if the template will not function correctly with values different from suggested values.
+
+Consumers SHOULD encourage the User to fill in these parameters with suggested values, and MAY prevent users from transcluding a template when a suggested value is not set.
+
+#### 3.2.14 `example`
 * Value: `null` or `InterfaceText`
 
 An example text for the parameter, to help users fill in the proper value.

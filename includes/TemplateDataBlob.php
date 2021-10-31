@@ -122,6 +122,7 @@ class TemplateDataBlob {
 			'type',
 			'suggestedvalues',
 			'suggestedvaluelabels',
+			'suggestedvaluesonly',
 		];
 
 		static $types = [
@@ -400,7 +401,21 @@ class TemplateDataBlob {
 			}
 
 			$paramNames[] = $paramName;
+
+			// Param.suggestedvaluesonly
+			if ( isset( $paramObj->suggestedvaluesonly ) ) {
+				if ( !is_bool( $paramObj->suggestedvaluesonly ) ) {
+					return Status::newFatal(
+						'templatedata-invalid-type',
+						"params.{$paramName}.suggestedvaluesonly",
+						'boolean'
+					);
+				}
+			} else {
+				$paramObj->suggestedvaluesonly = false;
+			}
 		}
+
 
 		// Param.inherits
 		// Done afterwards to avoid code duplication
@@ -867,6 +882,8 @@ class TemplateDataBlob {
 				$statusClass = 'mw-templatedata-doc-param-status-required';
 			} elseif ( $paramObj->suggested ) {
 				$status = 'templatedata-doc-param-status-suggested';
+			} elseif ( $paramObj->suggestedvaluesonly ) {
+				$status = 'templatedata-doc-param-status-suggestedvaluesonly';
 			} else {
 				$status = 'templatedata-doc-param-status-optional';
 			}
