@@ -159,6 +159,10 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 				'status' => '(templatedata-invalid-type: params.a.suggestedvaluelabels[0], string)',
 			],
 			[
+				'input' => '{ "params": { "a": { "suggestedvaluesonly": "" } } }',
+				'status' => '(templatedata-invalid-type: params.a.suggestedvaluesonly, boolean)',
+			],
+			[
 				'input' => '{
 					"params": {
 						"foo": {}
@@ -177,6 +181,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"deprecated": false,
 							"aliases": [],
 							"type": "unknown",
@@ -212,6 +217,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"deprecated": false,
 							"aliases": [],
 							"type": "line"
@@ -258,6 +264,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": true,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"deprecated": false,
 							"aliases": [
 								"1"
@@ -308,6 +315,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"default": {
 								"qqx": "example"
 							},
@@ -326,6 +334,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"default": {
 								"qqx": "overridden"
 							},
@@ -436,6 +445,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"deprecated": false,
 							"aliases": [],
@@ -449,6 +459,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -463,6 +474,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -505,6 +517,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [ "baz", "boo" ],
 							"suggestedvaluelabels": [ "baz", "boo" ],
+							"suggestedvaluesonly": false,
 							"deprecated": false,
 							"aliases": [ "foo", "baz" ],
 							"type": "line"
@@ -535,6 +548,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [ "baz", "boo" ],
 							"suggestedvaluelabels": [ "baz", "boo" ],
+							"suggestedvaluesonly": false,
 							"deprecated": false,
 							"aliases": [ "foo", "baz" ],
 							"type": "line"
@@ -1008,6 +1022,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"deprecated": false,
 							"aliases": [],
@@ -1045,6 +1060,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"deprecated": false,
 							"aliases": [],
@@ -1083,6 +1099,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1125,6 +1142,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1203,6 +1221,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1217,6 +1236,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1231,6 +1251,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1266,6 +1287,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1280,6 +1302,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1294,6 +1317,7 @@ class TemplateDataBlobTest extends MediaWikiIntegrationTestCase {
 							"suggested": false,
 							"suggestedvalues": [],
 							"suggestedvaluelabels": [],
+							"suggestedvaluesonly": false,
 							"description": null,
 							"example": null,
 							"deprecated": false,
@@ -1516,6 +1540,7 @@ HTML
 					'aliases' => [ 'Alias1', 'Alias2' ],
 					'suggestedvalues' => [ 'Suggested1', 'Suggested2' ],
 					'suggestedvaluelabels' => [ 'SuggestedLabel1', 'SuggestedLabel2' ],
+					'suggestedvaluesonly': false,
 					'suggested' => true,
 					'default' => 'Default docs',
 					'example' => 'Example docs',
@@ -1545,6 +1570,7 @@ HTML
 			</td>
 			<td class="mw-templatedata-doc-param-type mw-templatedata-doc-muted">(templatedata-doc-param-type-unknown)</td>
 			<td class="mw-templatedata-doc-param-status-suggested" data-sort-value="1">(templatedata-doc-param-status-suggested)</td>
+			<td class="mw-templatedata-doc-param-status-suggestedvaluesonly" data-sort-value="1">(templatedata-doc-param-status-suggestedvaluesonly)</td>
 		</tr>
 		<tr>
 			<th>deprecatedParam</th>

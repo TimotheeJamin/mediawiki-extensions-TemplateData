@@ -136,14 +136,14 @@ class TemplateDataHtmlFormatter {
 			);
 		}
 
-		$suggestedValues = [];
-		foreach ( $param->suggestedvalues as $suggestedValue ) {
-			$suggestedValues[] = Html::element( 'code', [], $suggestedValue );
+		$suggestedvalues = [];
+		foreach ( $param->suggestedvalues as $suggestedvalue ) {
+			$suggestedvalues[] = Html::element( 'code', [], $suggestedvalue );
 		}
 
-		$suggestedValueLabels = [];
-		foreach ( $param->suggestedValueLabels as $suggestedValueLabel ) {
-			$suggestedValueLabels[] = Html::element( 'code', [], $suggestedValueLabel );
+		$suggestedvalueLabels = [];
+		foreach ( $param->suggestedvalueLabels as $suggestedvalueLabel ) {
+			$suggestedvalueLabels[] = Html::element( 'code', [], $suggestedvalueLabel );
 		}
 
 		if ( $param->deprecated ) {
@@ -152,6 +152,8 @@ class TemplateDataHtmlFormatter {
 			$status = 'required';
 		} elseif ( $param->suggested ) {
 			$status = 'suggested';
+		} elseif ( $param->suggestedvaluesonly ) {
+			$status = 'suggestedvaluesonly';
 		} else {
 			$status = 'optional';
 		}
@@ -174,18 +176,18 @@ class TemplateDataHtmlFormatter {
 				)
 				. Html::rawElement( 'dl', [],
 					// Suggested Values
-					( $suggestedValues ? ( Html::element( 'dt', [],
+					( $suggestedvalues ? ( Html::element( 'dt', [],
 						$this->localizer->msg( 'templatedata-doc-param-suggestedvalues' )->text()
 					)
 					. Html::rawElement( 'dd', [],
-						implode( $this->localizer->msg( 'word-separator' )->escaped(), $suggestedValues )
+						implode( $this->localizer->msg( 'word-separator' )->escaped(), $suggestedvalues )
 					) ) : '' ) .
 					// Suggested Value Labels
-					( $suggestedValueLabels ? ( Html::element( 'dt', [],
+					( $suggestedvalueLabels ? ( Html::element( 'dt', [],
 						$this->localizer->msg( 'templatedata-doc-param-suggestedvaluelabels' )->text()
 					)
 					. Html::rawElement( 'dd', [],
-						implode( $this->localizer->msg( 'word-separator' )->escaped(), $suggestedValueLabels )
+						implode( $this->localizer->msg( 'word-separator' )->escaped(), $suggestedvalueLabels )
 					) ) : '' ) .
 					// Default
 					( $param->default !== null ? ( Html::element( 'dt', [],
@@ -236,11 +238,13 @@ class TemplateDataHtmlFormatter {
 					// mw-templatedata-doc-param-status-optional
 					// mw-templatedata-doc-param-status-required
 					// mw-templatedata-doc-param-status-suggested
+					// mw-templatedata-doc-param-status-suggestedvaluesonly
 					'class' => "mw-templatedata-doc-param-status-$status",
 					'data-sort-value' => [
 						'deprecated' => -1,
 						'suggested' => 1,
 						'required' => 2,
+						'suggestedvaluesonly' => 3,
 					][$status] ?? 0,
 				],
 				// Messages that can be used here:
@@ -248,6 +252,7 @@ class TemplateDataHtmlFormatter {
 				// templatedata-doc-param-status-optional
 				// templatedata-doc-param-status-required
 				// templatedata-doc-param-status-suggested
+				// templatedata-doc-param-status-suggestedvaluesonly
 				$this->localizer->msg( "templatedata-doc-param-status-$status" )->text()
 			)
 			. '</tr>';

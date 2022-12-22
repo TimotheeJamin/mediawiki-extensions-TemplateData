@@ -36,6 +36,7 @@ class TemplateDataValidator {
 		'type',
 		'suggestedvalues',
 		'suggestedvaluelabels',
+		'suggestedvaluesonly',
 	];
 
 	private const VALID_TYPES = [
@@ -285,6 +286,16 @@ class TemplateDataValidator {
 				}
 			} else {
 				$param->suggestedvaluelabels = [];
+			}
+
+			// Param.suggestedvaluesonly
+			if ( isset( $param->suggestedvaluesonly ) ) {
+				if ( !is_bool( $param->suggestedvaluesonly ) ) {
+					return Status::newFatal( 'templatedata-invalid-type',
+						"params.{$paramName}.suggestedvaluesonly", 'boolean' );
+				}
+			} else {
+				$param->suggestedvaluesonly = false;
 			}
 		}
 
